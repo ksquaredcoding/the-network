@@ -20,6 +20,23 @@ class PostsService {
     const post = new Post(res.data)
     return post
   }
+  async getPostsBySearch(term) {
+    const res = await postsServer.get('', {
+      params: {
+        query: term
+      }
+    })
+    AppState.posts = res.data.posts.map(p => new Post(p))
+  }
+  async deletePost(id) {
+    await postsServer.delete(`${id}`)
+    AppState.posts = AppState.posts.filter(p => p.id !== id)
+  }
+  async createPost(data) {
+    const res = await postsServer.post('', data)
+    const post = new Post(res.data)
+    AppState.posts = [post, ...AppState.posts]
+  }
 }
 
 export const postsService = new PostsService()

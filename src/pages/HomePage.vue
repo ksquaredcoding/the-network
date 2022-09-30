@@ -1,18 +1,17 @@
 <template>
   <div class="container-fluid">
     <div class="row justify-content-center">
-      <div class="col-2 my-2">
-        <button class="btn btn-danger" @click="changePage(previousPage)" :disabled="!previousPage"
-          :class="{'disabled' : !previousPage}">Previous</button>
-      </div>
-      <div class="col-2 my-2">
-        <button class="btn btn-success" @click="changePage(nextPage)" :disabled="!nextPage"
-          :class="{'disabled' : !nextPage}">Next</button>
+      <div class="col-md-6 my-3">
+        <div class="col-10">
+          <SearchForm />
+        </div>
       </div>
     </div>
-    <div class="row">
+    <PageButtons />
+    <div class="row justify-content-center">
       <PostCard v-for="p in posts" :post="p" />
     </div>
+    <PageButtons />
   </div>
 </template>
 
@@ -22,6 +21,8 @@ import { postsService } from "../services/PostsService.js"
 import { computed, onMounted } from "vue";
 import { AppState } from "../AppState.js";
 import PostCard from "../components/PostCard.vue";
+import PageButtons from "../components/PageButtons.vue";
+import SearchForm from "../components/SearchForm.vue";
 
 export default {
   setup() {
@@ -39,19 +40,9 @@ export default {
     });
     return {
       posts: computed(() => AppState.posts),
-      previousPage: computed(() => AppState.previousPage),
-      nextPage: computed(() => AppState.nextPage),
-      async changePage(pageUrl) {
-        try {
-          await postsService.getPosts(pageUrl)
-        } catch (error) {
-          console.error("[CHANGING PAGES]", error);
-          Pop.error(error.message);
-        }
-      }
     };
   },
-  components: { PostCard }
+  components: { PostCard, PageButtons, SearchForm }
 }
 </script>
 

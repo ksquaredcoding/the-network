@@ -4,6 +4,13 @@ export class Account {
     this.email = data.email
     this.name = data.name
     this.picture = data.picture
-    // TODO add additional properties if needed
+    this.coverImg = data.coverImg
+    this.class = data.class
+    this.graduated = data.graduated
+    this.bio = data.bio
+    this.linkedin = data.linkedin
+    this.createdAt = data.createdAt
+    this.resume = data.resume
+    this.github = data.github
   }
 }
