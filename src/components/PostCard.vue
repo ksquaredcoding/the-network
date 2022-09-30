@@ -9,7 +9,8 @@
         <p>{{post.body}}</p>
       </div>
       <div class="card-footer d-flex justify-content-end">
-        <i class="mdi mdi-cards-heart-outline text-success fs-3"></i>
+        <i class="mdi mdi-cards-heart text-success fs-3 selectable" @click="changeLike(post.id)" v-if="liked"></i>
+        <i class="mdi mdi-cards-heart-outline text-success fs-3 selectable" @click="changeLike(post.id)" v-else></i>
       </div>
     </div>
   </div>
@@ -19,6 +20,11 @@
 <script>
 import { Post } from "../models/Post.js";
 import PostCreator from "./PostCreator.vue";
+import { Account } from "../models/Account.js";
+import { computed } from "vue";
+import { AppState } from "../AppState.js";
+import Pop from "../utils/Pop.js";
+import { postsService } from "../services/PostsService.js";
 
 export default {
   props: {
@@ -28,7 +34,22 @@ export default {
     }
   },
   setup(props) {
-    return {};
+    return {
+      account: computed(() => AppState.account),
+      async changeLike(id) {
+        try {
+          await postsService.changeLike(id)
+        } catch (error) {
+          console.error('[(UN)LIKE POST]', error)
+          Pop.error(error.message)
+        }
+      },
+      liked: computed(() => {
+        if (props.post.likeIds.includes(AppState.account.id)) {
+          return true
+        } else { return false }
+      })
+    };
   },
   components: { PostCreator }
 }

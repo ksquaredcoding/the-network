@@ -3,7 +3,7 @@ import { AppState } from '../AppState'
 import { audience, clientId, domain } from '../env'
 import { router } from '../router'
 import { accountService } from './AccountService'
-import { sandboxServer } from './AxiosService'
+import { postsServer, sandboxServer } from './AxiosService'
 import { socketService } from './SocketService'
 
 export const AuthService = initialize({
@@ -22,6 +22,8 @@ export const AuthService = initialize({
 
 AuthService.on(AuthService.AUTH_EVENTS.AUTHENTICATED, async function () {
   sandboxServer.defaults.headers.authorization = AuthService.bearer
+  postsServer.defaults.headers.authorization = AuthService.bearer
+  postsServer.interceptors.request.use(refreshAuthToken)
   sandboxServer.interceptors.request.use(refreshAuthToken)
   AppState.user = AuthService.user
   await accountService.getAccount()
@@ -39,6 +41,7 @@ async function refreshAuthToken(config) {
   } else if (needsRefresh) {
     await AuthService.getTokenSilently()
     sandboxServer.defaults.headers.authorization = AuthService.bearer
+    postsServer.defaults.headers.authorization = AuthService.bearer
     socketService.authenticate(AuthService.bearer)
   }
   return config
