@@ -10,7 +10,7 @@
     <PageButtons />
     <div class="row justify-content-center" v-if="results.length > 0">
       <h3>Profiles:</h3>
-      <ProfileResults v-for="r in results" />
+      <ProfileResults v-for="r in results" :profile="r" />
     </div>
     <div class="row justify-content-center">
       <h3 v-if="results.length > 0">Posts:</h3>
@@ -29,8 +29,12 @@ import PostCard from "../components/PostCard.vue";
 import PageButtons from "../components/PageButtons.vue";
 import SearchForm from "../components/SearchForm.vue";
 import ProfileResults from "../components/ProfileResults.vue";
+import { Account } from "../models/Account.js";
 
 export default {
+  props: {
+    result: { type: Account, required: true }
+  },
   setup() {
     async function getPosts() {
       try {
