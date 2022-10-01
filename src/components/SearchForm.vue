@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent="handleSubmit">
     <div class="input-group">
-      <input type="text" class="form-control" required="true" minlength="2" placeholder="Search" name="search"
+      <input type="text" class="form-control" required="true" minlength="1" placeholder="Search" name="search"
         v-model="editable.term">
       <label for="search" class="visually-hidden">Search</label>
       <button type="submit" class="btn btn-info "><i class="mdi mdi-magnify"></i></button>

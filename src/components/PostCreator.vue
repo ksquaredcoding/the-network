@@ -6,7 +6,6 @@
       </router-link>
       <p><b>{{creator.name}}</b></p>
     </div>
-
   </div>
 </template>
 

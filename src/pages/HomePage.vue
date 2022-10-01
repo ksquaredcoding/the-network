@@ -8,7 +8,12 @@
       </div>
     </div>
     <PageButtons />
+    <div class="row justify-content-center" v-if="results.length > 0">
+      <h3>Profiles:</h3>
+      <ProfileResults v-for="r in results" />
+    </div>
     <div class="row justify-content-center">
+      <h3 v-if="results.length > 0">Posts:</h3>
       <PostCard v-for="p in posts" :post="p" />
     </div>
     <PageButtons />
@@ -23,6 +28,7 @@ import { AppState } from "../AppState.js";
 import PostCard from "../components/PostCard.vue";
 import PageButtons from "../components/PageButtons.vue";
 import SearchForm from "../components/SearchForm.vue";
+import ProfileResults from "../components/ProfileResults.vue";
 
 export default {
   setup() {
@@ -40,9 +46,10 @@ export default {
     });
     return {
       posts: computed(() => AppState.posts),
+      results: computed(() => AppState.searchProfiles)
     };
   },
-  components: { PostCard, PageButtons, SearchForm }
+  components: { PostCard, PageButtons, SearchForm, ProfileResults }
 }
 </script>
 

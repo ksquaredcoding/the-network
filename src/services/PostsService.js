@@ -1,4 +1,5 @@
 import { AppState } from "../AppState.js"
+import { Account } from "../models/Account.js"
 import { Post } from "../models/Post.js"
 import { sandboxServer, postsServer } from "./AxiosService.js"
 
@@ -26,7 +27,14 @@ class PostsService {
         query: term
       }
     })
+    const resToo = await sandboxServer.get('api/profiles', {
+      params: {
+        query: term
+      }
+    })
     AppState.posts = res.data.posts.map(p => new Post(p))
+    AppState.searchProfiles = resToo.data.map(p => new Account(p))
+    console.log(AppState.searchProfiles);
   }
   async deletePost(id) {
     await postsServer.delete(`${id}`)
@@ -36,6 +44,13 @@ class PostsService {
     const res = await postsServer.post('', data)
     const post = new Post(res.data)
     AppState.posts = [post, ...AppState.posts]
+  }
+  async getPostsByProfile(id) {
+    AppState.posts = []
+    const res = await sandboxServer.get(`api/profiles/${id}/posts`)
+    AppState.posts = res.data.posts.map(p => new Post(p))
+    AppState.nextPage = res.data.older
+    AppState.previousPage = res.data.newer
   }
 }
 
