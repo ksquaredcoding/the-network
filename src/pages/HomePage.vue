@@ -4,6 +4,7 @@
       <div class="col-md-6 my-3">
         <div class="col-10">
           <SearchForm />
+          <button type="button" class="btn btn-warning m-1" @click="resetSearch()">Reset Search</button>
         </div>
       </div>
     </div>
@@ -50,7 +51,16 @@ export default {
     });
     return {
       posts: computed(() => AppState.posts),
-      results: computed(() => AppState.searchProfiles)
+      results: computed(() => AppState.searchProfiles),
+      async resetSearch() {
+        try {
+          await getPosts()
+          AppState.searchProfiles = []
+        } catch (error) {
+          console.error("[RESETTING SEARCH]", error);
+          Pop.error(error.message);
+        }
+      }
     };
   },
   components: { PostCard, PageButtons, SearchForm, ProfileResults }

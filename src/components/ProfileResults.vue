@@ -1,16 +1,16 @@
 <template>
   <div class="component col-md-8">
     <div class="d-flex justify-content-evenly">
-      <a :href="this.profileLink">
+      <router-link :to="{name: 'Profile', params: {id: profile?.id}}">
         <img :src="profile?.picture" :alt="profile?.name" :title="profile?.name">
-      </a>
+      </router-link>
       <h3>{{profile?.name}} <span v-if="profile?.graduated"><i class="mdi mdi-account-school selectable"></i></span>
       </h3>
     </div>
   </div>
 </template>
 
-<!-- TODO get profiles on search, not grabbing id for router link -->
+<!-- TODO they showed, maybe try router link again -->
 <script>
 import { Account } from "../models/Account.js";
 export default {
