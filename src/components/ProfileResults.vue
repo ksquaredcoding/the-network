@@ -10,7 +10,6 @@
   </div>
 </template>
 
-<!-- TODO they showed, maybe try router link again -->
 <script>
 import { Account } from "../models/Account.js";
 export default {

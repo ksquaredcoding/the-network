@@ -2,7 +2,8 @@
   <div v-if="profile">
     <div class="container-fluid">
       <div class="row justify-content-center">
-        <div class="col-md-6 my-3">
+        <div class="col-12 my-3">
+          <ProfileDetail :profile="profile" />
         </div>
       </div>
       <PageButtons />

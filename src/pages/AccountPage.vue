@@ -1,6 +1,9 @@
 <template>
-  .<div class="container-fluid">
-    <div class="row">
+  <div class="container-fluid">
+    <div class="row flex-column">
+
+      <ProfileDetail :profile="account" />
+
       <div class="col-md-8">
         <AccountForm />
       </div>
@@ -12,13 +15,14 @@
 import { computed } from 'vue'
 import { AppState } from '../AppState'
 import AccountForm from "../components/AccountForm.vue";
+import ProfileDetail from "../components/ProfileDetail.vue";
 export default {
   setup() {
     return {
       account: computed(() => AppState.account)
     };
   },
-  components: { AccountForm }
+  components: { AccountForm, ProfileDetail }
 }
 </script>
 

@@ -1,24 +1,29 @@
 <template>
-  <div class="cover-img text-shadow" :style="{backgroundImage: `url(${profile.coverImg})`}">
-    <img :src="profile.picture" :alt="profile.name">
+  <div class="cover-img img-fluid text-shadow" :style="{backgroundImage: `url(${profile?.coverImg})`}">
+    <img :src="profile?.picture" :alt="profile?.name" class="profile-img">
     <div class="my-4">
-      <h2>{{profile.name}} <span v-if="profile.graduated"><i class="mdi mdi-account-school selectable"></i></span></h2>
+      <h2 class="text-shadow">{{profile?.name}} <span v-if="profile?.graduated"><i
+            class="mdi mdi-account-school"></i></span>
+      </h2>
       <h3>
-        <p>Joined on: <b>{{new Date(profile.createdAt).toLocaleDateString('en-us', {month: 'short', day: '2-digit',
+        <p class="text-shadow">Joined on: <b>{{new Date(profile?.createdAt).toLocaleDateString('en-us', {month: 'short',
+        day: '2-digit',
         year: '2-digit'})}}</b></p>
-        <p>Class: <b>{{new Date(profile.class).toLocaleDateString('en-us', {month: 'short', day: '2-digit',
+        <p class="text-shadow" v-if="profile?.class.length > 0">Class: <b>{{new
+        Date(profile?.class).toLocaleDateString('en-us', {month:
+        'short', day: '2-digit',
         year: '2-digit'})}}</b></p>
-        <a v-if="profile.github" :href="profile.github" target="_blank">
+        <a v-if="profile?.github" :href="profile?.github" target="_blank">
           <i class="mdi mdi-github selectable"></i>
         </a>
-        <a v-if="profile.linkedin" :href="profile.linkedin" target="_blank">
+        <a v-if="profile?.linkedin" :href="profile?.linkedin" target="_blank">
           <i class="mdi mdi-linkedin selectable"></i>
         </a>
-        <a v-if="profile.resume" :href="profile.resume" target="_blank">
+        <a v-if="profile?.resume" :href="profile?.resume" target="_blank">
           <i class="bi bi-file-earmark-person-fill selectable"></i>
         </a>
       </h3>
-      <p>{{profile.bio}}</p>
+      <p>{{profile?.bio}}</p>
     </div>
   </div>
 </template>
@@ -40,18 +45,25 @@ export default {
 
 <style lang="scss" scoped>
 .cover-img {
+  width: 100vw;
   height: 50vh;
   padding: 3rem;
-  background-attachment: fixed;
   background-position: center;
   background-size: cover;
 }
 
 .text-shadow {
-  text-shadow: 1px 1px var(--my-dark),
-    0px 0px 4px rgba(203, 144, 34, 0.686);
-  color: antiquewhite;
+  text-shadow: 3px 3px var(--my-dark),
+    0px 0px 10px rgba(186, 169, 15, 0.845);
+  color: rgb(255, 255, 255);
   font-weight: bold;
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.08rem;
+}
+
+.profile-img {
+  height: 15rem;
+  width: 15rem;
+  object-fit: cover;
+  border-radius: 50%;
 }
 </style>

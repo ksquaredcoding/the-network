@@ -30,12 +30,13 @@
     </div>
     <div class="form-group">
       <label for="graduated">Graduated:</label>
-      <input type="checkbox" v-model="editable.graduated" class="form-check-input mx-1">
+      <input type="checkbox" v-model="editable.graduated" class="form-check-input mx-1"
+        :value="account.graduated ? 'checked' : ''">
     </div>
     <div class="form-group">
       <label for="bio">Bio:</label>
-      <textarea v-model="editable.bio" placeholder="Share a fun fact with the class" class="form-control" rows="4"
-        required></textarea>
+      <textarea v-model="editable.bio" placeholder="Share a fun fact with the class" class="form-control"
+        rows="4"></textarea>
     </div>
     <div class="my-3">
       <button class="btn btn-primary" type="submit">Submit Post</button>
@@ -49,6 +50,7 @@ import { ref, watchEffect } from "vue";
 import Pop from '../utils/Pop.js';
 import { AppState } from '../AppState.js';
 import { accountService } from "../services/AccountService.js";
+import { computed } from "@vue/reactivity";
 export default {
   setup() {
     const editable = ref({})
@@ -66,7 +68,8 @@ export default {
           console.error('[EDIT ACCOUNT]', error)
           Pop.error(error.message)
         }
-      }
+      },
+      account: computed(() => AppState.account)
     }
   }
 }

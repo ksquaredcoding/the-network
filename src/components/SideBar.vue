@@ -1,5 +1,5 @@
 <template>
-  <div class="col-lg-3 col-md-4 d-none d-md-block bg-dark text-light sidebar">
+  <div class="col-xl-3 col-md-4 d-none d-md-block bg-dark text-light sidebar">
     <div class="mt-5 ms-4">
       <Login />
     </div>
