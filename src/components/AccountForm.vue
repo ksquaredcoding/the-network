@@ -39,7 +39,7 @@
         rows="4"></textarea>
     </div>
     <div class="my-3">
-      <button class="btn btn-primary" type="submit">Submit Post</button>
+      <button class="btn btn-primary" type="submit">Submit</button>
     </div>
   </form>
 </template>

@@ -14,6 +14,16 @@
       </router-link>
     </div>
     <div class="mt-4 ms-4">
+      <router-link :to="{
+      name: 'About' }">
+        <button class="btn">
+          <span class="text-success lighten-30 selectable text-uppercase">
+            About
+          </span>
+        </button>
+      </router-link>
+    </div>
+    <div class="mt-4 ms-4">
       <button class="btn" data-bs-target="#postsCanvas" data-bs-toggle="offcanvas" v-if="account.id">
         <span class="text-success lighten-30 selectable text-uppercase">
           Create Post
