@@ -5,7 +5,7 @@
       <ProfileDetail :profile="account" />
 
       <div class="col-md-8">
-        <AccountForm />
+        <AccountForm class="my-2" />
       </div>
     </div>
   </div>

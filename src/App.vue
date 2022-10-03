@@ -1,16 +1,16 @@
 <template>
-  <header>
+  <header class="abd">
     <img :src="ads[1]?.banner" :alt="ads[1]?.title" class="ad-style">
   </header>
-  <main class="container-fluid">
+  <main class=" container-fluid">
     <div class="row">
       <SideBar />
-      <div class="col-md-8 main-content">
+      <div class="col-md-8 main-content abd">
         <router-view />
       </div>
     </div>
   </main>
-  <footer>
+  <footer class="abd">
     <img :src="ads[0]?.banner" :alt="ads[0]?.title" class="ad-style">
   </footer>
   <CreatePostForm />
@@ -59,5 +59,9 @@ export default {
   height: 15vh;
   object-fit: cover;
   object-position: center;
+}
+
+.abd {
+  overflow-x: hidden;
 }
 </style>

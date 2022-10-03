@@ -1,5 +1,5 @@
 <template>
-  <div class="cover-img img-fluid text-shadow" :style="{backgroundImage: `url(${profile?.coverImg})`}">
+  <div class="cover-img img-fluid text-shadow elevation-2" :style="{backgroundImage: `url(${profile?.coverImg})`}">
     <img :src="profile?.picture" :alt="profile?.name" class="profile-img">
     <div class="my-4">
       <h2 class="text-shadow">{{profile?.name}} <span v-if="profile?.graduated"><i
@@ -9,21 +9,21 @@
         <p class="text-shadow">Joined on: <b>{{new Date(profile?.createdAt).toLocaleDateString('en-us', {month: 'short',
         day: '2-digit',
         year: '2-digit'})}}</b></p>
-        <p class="text-shadow" v-if="profile?.class.length > 0">Class: <b>{{new
+        <p class="text-shadow" v-if="profile?.class">Class: <b>{{new
         Date(profile?.class).toLocaleDateString('en-us', {month:
         'short', day: '2-digit',
         year: '2-digit'})}}</b></p>
         <a v-if="profile?.github" :href="profile?.github" target="_blank">
-          <i class="mdi mdi-github selectable"></i>
+          <i class="mdi mdi-github selectable text-white"></i>
         </a>
         <a v-if="profile?.linkedin" :href="profile?.linkedin" target="_blank">
-          <i class="mdi mdi-linkedin selectable"></i>
+          <i class="mdi mdi-linkedin selectable text-white"></i>
         </a>
         <a v-if="profile?.resume" :href="profile?.resume" target="_blank">
-          <i class="bi bi-file-earmark-person-fill selectable"></i>
+          <i class="bi bi-file-earmark-person-fill selectable text-white"></i>
         </a>
       </h3>
-      <p>{{profile?.bio}}</p>
+      <p class="mb-2 read-bgrd p-1 d-flex">{{profile?.bio}}</p>
     </div>
   </div>
 </template>
@@ -34,7 +34,7 @@ import { Account } from "../models/Account.js";
 
 export default {
   props: {
-    profile: { type: Account, required: true }
+    profile: { type: Object, required: true }
   },
   setup() {
     return {}
@@ -46,7 +46,7 @@ export default {
 <style lang="scss" scoped>
 .cover-img {
   width: 100vw;
-  height: 50vh;
+  height: 55vh;
   padding: 3rem;
   background-position: center;
   background-size: cover;
@@ -65,5 +65,12 @@ export default {
   width: 15rem;
   object-fit: cover;
   border-radius: 50%;
+}
+
+.read-bgrd {
+  background-color: rgba(75, 73, 73, 0.723);
+  border-radius: 5%;
+  overflow-y: auto;
+  max-height: 8vh;
 }
 </style>

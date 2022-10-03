@@ -7,6 +7,9 @@ class ProfilesService {
     const res = await sandboxServer.get(`api/profiles/${id}`)
     AppState.activeProfile = new Account(res.data)
   }
+  resetSearchProfiles() {
+    AppState.searchProfiles = []
+  }
 }
 
 export const profilesService = new ProfilesService()

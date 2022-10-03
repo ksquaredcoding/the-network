@@ -63,7 +63,6 @@ export default {
       async handleSubmit() {
         try {
           await accountService.editAccount(editable.value)
-          editable.value = ''
         } catch (error) {
           console.error('[EDIT ACCOUNT]', error)
           Pop.error(error.message)

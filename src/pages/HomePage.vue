@@ -31,6 +31,7 @@ import PageButtons from "../components/PageButtons.vue";
 import SearchForm from "../components/SearchForm.vue";
 import ProfileResults from "../components/ProfileResults.vue";
 import { Account } from "../models/Account.js";
+import { profilesService } from "../services/ProfilesService.js";
 
 export default {
   props: {
@@ -55,7 +56,7 @@ export default {
       async resetSearch() {
         try {
           await getPosts()
-          AppState.searchProfiles = []
+          profilesService.resetSearchProfiles()
         } catch (error) {
           console.error("[RESETTING SEARCH]", error);
           Pop.error(error.message);
