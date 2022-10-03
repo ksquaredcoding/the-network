@@ -6,6 +6,7 @@ class AdsService {
   async getAds() {
     const res = await sandboxServer.get('api/ads')
     AppState.ads = res.data.map(a => new Ad(a))
+    console.log(AppState.ads);
   }
 }
 
